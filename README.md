@@ -1,85 +1,50 @@
-# env
+# 核心庫: env
 
-## Installation
+## 解決問題
+
+Go 原生庫 `os` 獲取的環境變數默認的變數類型只有 `string`， `env` 提供多類型的環境變數獲取，並提供預設值設置，以及檢查必須設罝的環境變數的功能。
+
+## 安裝
 
 ```bash
 go get -u github.com/metadiv-io/env
 ```
 
-## Highlights
+## 支援類型
 
-### One variable
+* string
+* int
+* int64
+* int32
+* int16
+* int8
+* float64
+* float32
+* uint
+* uint64
+* uint32
+* uint16
+* uint8
+* bool
+* complex128
+* complex64
+* byte
+* rune
 
-* env.String(key string, defaultValue ...string) string
+## 使用
 
-* env.Int(key string, defaultValue ...int) int
+```go
+package main
 
-* env.Int64(key string, defaultValue ...int64) int64
+import (
+    "fmt"
+    "github.com/metadiv-io/env"
+)
 
-* env.Int32(key string, defaultValue ...int32) int32
-
-* env.Int16(key string, defaultValue ...int16) int16
-
-* env.Int8(key string, defaultValue ...int8) int8
-
-* env.Float64(key string, defaultValue ...float64) float64
-
-* env.Float32(key string, defaultValue ...float32) float32
-
-* env.Uint(key string, defaultValue ...uint) uint
-
-* env.Uint64(key string, defaultValue ...uint64) uint64
-
-* env.Uint32(key string, defaultValue ...uint32) uint32
-
-* env.Uint16(key string, defaultValue ...uint16) uint16
-
-* env.Uint8(key string, defaultValue ...uint8) uint8
-
-* env.Bool(key string, defaultValue ...bool) bool
-
-* env.Complex128(key string, defaultValue ...complex128) complex128
-
-* env.Complex64(key string, defaultValue ...complex64) complex64
-
-* env.Byte(key string, defaultValue ...byte) byte
-
-* env.Rune(key string, defaultValue ...rune) rune
-
-### Multiple variables
-
-* env.Strings(key string, defaultValue ...string) []string
-
-* env.Ints(key string, defaultValue ...int) []int
-
-* env.Int64s(key string, defaultValue ...int64) []int64
-
-* env.Int32s(key string, defaultValue ...int32) []int32
-
-* env.Int16s(key string, defaultValue ...int16) []int16
-
-* env.Int8s(key string, defaultValue ...int8) []int8
-
-* env.Float64s(key string, defaultValue ...float64) []float64
-
-* env.Float32s(key string, defaultValue ...float32) []float32
-
-* env.Uints(key string, defaultValue ...uint) []uint
-
-* env.Uint64s(key string, defaultValue ...uint64) []uint64
-
-* env.Uint32s(key string, defaultValue ...uint32) []uint32
-
-* env.Uint16s(key string, defaultValue ...uint16) []uint16
-
-* env.Uint8s(key string, defaultValue ...uint8) []uint8
-
-* env.Bools(key string, defaultValue ...bool) []bool
-
-* env.Complex128s(key string, defaultValue ...complex128) []complex128
-
-* env.Complex64s(key string, defaultValue ...complex64) []complex64
-
-* env.Bytes(key string, defaultValue ...byte) []byte
-
-* env.Runes(key string, defaultValue ...rune) []rune
+func main() {
+    v := env.String("STRING_VAR", "default") // with default
+    v1 := env.MustString("STRING_VAR") // panic if STRING_VAR is not set
+    vs := env.Strings("STRING_VARS", []string{"default"}) // list with default
+    vs1 := env.MustStrings("STRING_VARS") // panic if STRING_VAR is not set
+}
+```
