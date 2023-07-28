@@ -23,8 +23,10 @@ func NewManager[T any](key string, defaultValue ...T) *Manager[T] {
 func NewMustManager[T any](key string) *Manager[T] {
 	m := NewManager[T](key)
 	m.Must = true
-	if m.Value.ToString() == "" {
-		panic("env: key " + key + " not found")
+	if os.Getenv("GIN_MODE") == "release" || os.Getenv("GIN_MODE") == "debug" {
+		if m.Value.ToString() == "" {
+			panic("env: key " + key + " not found")
+		}
 	}
 	return m
 }
