@@ -28,8 +28,6 @@ go get -u github.com/metadiv-io/env
 * bool
 * complex128
 * complex64
-* byte
-* rune
 
 ## 使用
 
