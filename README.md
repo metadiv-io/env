@@ -1,16 +1,20 @@
-# 核心庫: env
+# Env Package Documentation
 
-## 解決問題
+## Problem Statement
 
-Go 原生庫 `os` 獲取的環境變數默認的變數類型只有 `string`， `env` 提供多類型的環境變數獲取，並提供預設值設置，以及檢查必須設罝的環境變數的功能。
+The native Go library, os, retrieves environment variables with a default type of string. The env package addresses this limitation by providing a solution for retrieving environment variables in multiple data types. Additionally, it offers functionality for setting default values and checking the presence of required environment variables.
 
-## 安裝
+## Installation
 
-```bash
+To integrate the env package into your Go project, use the following go get command:
+
+``` bash
 go get -u github.com/metadiv-io/env
 ```
 
-## 支援類型
+## Supported Types
+
+The env package supports the following data types for environment variable retrieval:
 
 * string
 * int
@@ -29,20 +33,27 @@ go get -u github.com/metadiv-io/env
 * complex128
 * complex64
 
-## 使用
+## Usage
 
 ```go
 package main
 
 import (
-    "fmt"
-    "github.com/metadiv-io/env"
+	"fmt"
+	"github.com/metadiv-io/env"
 )
 
 func main() {
-    v := env.String("STRING_VAR", "default") // with default
-    v1 := env.MustString("STRING_VAR") // panic if STRING_VAR is not set
-    vs := env.Strings("STRING_VARS", []string{"default"}) // list with default
-    vs1 := env.MustStrings("STRING_VARS") // panic if STRING_VAR is not set
+	// Retrieve a string variable with a default value
+	v := env.String("STRING_VAR", "default")
+
+	// Retrieve a string variable and panic if not set
+	v1 := env.MustString("STRING_VAR")
+
+	// Retrieve a list of string variables with a default value
+	vs := env.Strings("STRING_VARS", []string{"default"})
+
+	// Retrieve a list of string variables and panic if not set
+	vs1 := env.MustStrings("STRING_VARS")
 }
 ```
