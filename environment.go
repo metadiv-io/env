@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var RegisteredEnvironments = make(map[string]*Environment)
+
 // New creates a new environment variable
 // It will return an error if the environment variable is not set and required is true
 func New(key string, required bool) *Environment {
@@ -18,6 +20,7 @@ func New(key string, required bool) *Environment {
 	if required && e.Value == "" {
 		panic(fmt.Sprintf("environment variable %s is required", key))
 	}
+	RegisteredEnvironments[key] = e
 	return e
 }
 
